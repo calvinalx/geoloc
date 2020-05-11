@@ -1,9 +1,8 @@
-import micro from "micro-cors"
 import geolite2 from "geolite2"
 import maxmind from "maxmind"
 import dns from "dns"
 
-function geo(req, res) {
+export default (req, res) => {
   const ip = req.headers["x-forwarded-for"]
 
   maxmind.open(geolite2.paths.city).then((lookup) => {
@@ -16,6 +15,3 @@ function geo(req, res) {
     }
   })
 }
-
-const cors = micro()
-export default cors(geo)

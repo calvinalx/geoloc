@@ -14,7 +14,6 @@
   "dependencies": {
     "@maxmind/geoip2-node": "^1.4.0",
     "geolite2": "^3.0.0",
-    "maxmind": "^4.1.1",
-    "micro-cors": "^0.1.1"
+    "maxmind": "^4.1.1"
   }
 }

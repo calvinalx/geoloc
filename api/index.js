@@ -1,7 +1,6 @@
-import micro from "micro-cors"
 import dns from "dns"
 
-function ip(req, res) {
+export default (req, res) => {
   if (req.query.host) {
     dns.lookup(req.query.host, (_, address) => {
       res.json({ ip: address })
@@ -11,6 +10,3 @@ function ip(req, res) {
     res.json({ ip })
   }
 }
-
-const cors = micro()
-export default cors(ip)
