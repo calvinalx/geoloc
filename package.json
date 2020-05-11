@@ -1,0 +1,20 @@
+{
+  "name": "geoloc",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Simple IP and Geolocation service.",
+  "author": {
+    "name": "Calvin Alexander",
+    "url": "https://calvin.website"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@maxmind/geoip2-node": "^1.4.0",
+    "geolite2": "^3.0.0",
+    "maxmind": "^4.1.1",
+    "micro-cors": "^0.1.1"
+  }
+}
