@@ -2,16 +2,22 @@ import geolite2 from "geolite2"
 import maxmind from "maxmind"
 import dns from "dns"
 
-export default (req, res) => {
-  const ip = req.headers["x-forwarded-for"]
+export default async (req, res) => {
 
-  maxmind.open(geolite2.paths.city).then((lookup) => {
-    if (req.query.host) {
-      dns.lookup(req.query.host, (_, address) => {
-        res.json(lookup.get(address))
-      })
-    } else {
-      res.json(lookup.get(ip))
-    }
-  })
+  let ip
+  if (req.query.host) {
+    dns.lookup(req.query.host, (_, address) => {
+      ip = address
+    })
+  } else {
+    ip = req.headers["x-forwarded-for"]
+  }
+
+  const lookupCity = await maxmind.open(geolite2.paths.city)
+  const lookupAsn = await maxmind.open(geolite2.paths.asn)
+
+  const city = lookupCity.get(ip)
+  const asn = lookupAsn.get(ip)
+
+  res.json({ ...city, asn })
 }
